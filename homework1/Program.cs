@@ -12,40 +12,42 @@ void PrintOutNaturaleNumbersRevers(int num1, int num2)
     Console.Write($"{num1} ");
 }
 
-bool ItIsDigits(string input, int index = 0)
+bool ItIsDigits(string input)
 {
-    if (index == input.Length)
+    if (input == null) return false;
+    if (int.TryParse(input, out int number))
     {
         return true;
     }
-    if (char.IsAsciiLetter(input[index]))
-    {
-        Console.Write($"Неверный ввод:{input[index]}");
-    }
-    ItIsDigits(input, index + 1);
+    Console.Write($"Неверный ввод, '{input}' STOP.");
     return false;
+    
 }
 
-Console.WriteLine("Введите численное значение M");
-int number1 = Convert.ToInt32(Console.ReadLine());
-Console.WriteLine("Введите численное значение N");
-int number2 = Convert.ToInt32(Console.ReadLine());
+Console.Write("Введите численное значение M:");
+string str1 = Console.ReadLine();
+Console.Write("Введите численное значение N:");
+string str2 = Console.ReadLine();
 
-if (number1 > number2)
+bool output1 = ItIsDigits(str1);
+bool output2 = ItIsDigits(str2);
+
+
+
+if (output1 == true && output2 == true)
 {
-    PrintOutNaturaleNumbersRevers(number2, number1);
+    int number1 = Convert.ToInt32(str1);
+    int number2 = Convert.ToInt32(str2);    
+    if (number1 > number2)
+    {
+        PrintOutNaturaleNumbersRevers(number2, number1);
+    }
+    else if (number2 > number1)
+    {
+        PrintOutNaturaleNumbers(number2, number1);
+    }
 }
-if (number2 > number1)
+else
 {
-    PrintOutNaturaleNumbers(number2, number1);
+   Console.Write(" Введите целочисленное значение!"); 
 }
-
-
-
-
-
-
-
-
-
-
